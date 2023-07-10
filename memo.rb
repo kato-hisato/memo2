@@ -11,7 +11,7 @@ memo_type = gets.to_i # ユーザーの入力値を取得し、数字へ変換�
 if memo_type == 1
   
   #ファイル名入力
-  puts "拡張子除いたファイル名を入力してください"
+  puts "拡張子除いたをファイル名を入力してください"
   file_name = gets.chomp
   
   begin
@@ -23,14 +23,13 @@ if memo_type == 1
     #作成、テキスト入力
     puts "メモ内容を記入してください"
     puts "記入が完了したらCtrl＋Dを押しましょう"
-    get_text = gets.chomp
-    memo_text = ["#{get_text}"]
-  
+    get_text = STDIN.read
+    
     #csv作成し記入する
     csv = CSV.open("#{file_name}.csv","a")
-    csv << memo_text
+    csv << [get_text]
     csv.close
-    puts "#{file_name}.csvが作成されました"
+    puts "\n#{file_name}.csvが作成されました"
   end
 
 #既存のメモの編集
@@ -48,14 +47,13 @@ elsif memo_type == 2
     #テキスト入力
     puts "メモ内容を記入してください"
     puts "記入が完了したらCtrl＋Dを押しましょう"
-    get_text = gets.chomp
-    memo_text = ["#{get_text}"]
-  
+    get_text = STDIN.read
+    
     #csvに追記する
     csv = CSV.open("#{file_name}.csv","a")
-    csv << memo_text
+    csv << [get_text]
     csv.close
-    puts "#{file_name}.csvが編集されました"
+    puts "\n#{file_name}.csvが編集されました"
   
   rescue
     #存在しない
